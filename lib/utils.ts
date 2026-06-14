@@ -1,9 +1,12 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+// Required by shadcn/ui - DO NOT REMOVE
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+// ── Custom helpers ──────────────────────────────────────────────
 
 export function formatRupiah(amount: number): string {
   return new Intl.NumberFormat("id-ID", {
@@ -47,8 +50,7 @@ export function buildWhatsAppUrl(phone: string, message: string): string {
 export function validateImei(imei: string): boolean {
   const cleaned = imei.replace(/\s/g, "");
   if (!/^\d{15}$/.test(cleaned)) return false;
-
-  // Luhn algorithm check
+  // Luhn algorithm
   let sum = 0;
   for (let i = 0; i < 15; i++) {
     let digit = parseInt(cleaned[i]);
